@@ -1,2 +1,0 @@
-TARGETS="hello sendrecv bcast gather scatter reduce"
-#TARGETS="myprogram"
