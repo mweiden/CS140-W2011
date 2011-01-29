@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+#include <time.h>
 #include "mpi.h"
 
 void printVec(double* vec, int size, int my_rank) {
@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 	double tempD;
 	int tempI;
 	char * pEnd;
-	int n = atoi(argv[1]);
+	int n = 12;//atoi(argv[1]);
 	
 	MPI_Init(&argc, &argv);
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 	int myAbove = 0;
 	int above;
 
-	srand(my_rank);
+	srand(time(NULL) - my_rank);
 
 	double sum;
 	double mySum;

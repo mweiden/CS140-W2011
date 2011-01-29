@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include "mpi.h"
 
 void printVec(double* vec, int size, int my_rank) {
@@ -49,7 +50,7 @@ int main(int argc, char** argv) {
 
 	int neighbors[] = {(my_rank+(p-1))%p, (my_rank+1)%p};
 
-	srand(my_rank);
+	srand(time(NULL) - my_rank);
 
 	double delta[2];
 	double d=1e10;
@@ -60,7 +61,7 @@ int main(int argc, char** argv) {
 	double loadVec[2];
 	
 	for (i = 0; i < 2; i++) {
-		coords[i] = rand() % 10 - 5;
+		coords[i] = rand() % 20 - 10;
 		sendVec[i] = coords[i];
 	}
 	printVec(coords,2,my_rank);
