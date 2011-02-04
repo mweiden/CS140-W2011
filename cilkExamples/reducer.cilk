@@ -1,0 +1,29 @@
+#include <cilk.h>
+#include <reducer_opadd.h>
+
+#include <iostream>
+
+using namespace std;
+
+int func() {
+	return 1;
+}
+
+int cilk_main( int argc, char* argv[] ) {
+	
+	cilk::reducer_opadd<int> x;
+	//x.set_value(0); // This is the way we set the base value
+	
+	int y = 0;
+	
+	// Count to 100000!
+	cilk_for ( int i = 0; i < 100000; i++ ) {
+		x += func(); // Here += is an hyperobject specific operation, its list-like append really
+		y += func(); // Here += is adding onto x
+	}
+		
+	cout << endl << "Ilustration of a data race:" << endl << "X and Y should equal 100000 right? X = " \
+		<< x.get_value() << " and Y = " << y << endl << endl;
+
+	return 0;
+}

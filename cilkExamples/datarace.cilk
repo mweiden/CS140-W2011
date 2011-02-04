@@ -1,0 +1,32 @@
+#ifdef CILKPAR
+#include <cilk.h>
+#include <reducer_opadd.h>
+#else
+#define cilk_for for
+#define cilk_main main
+#define cilk_spawn
+#define cilk_sync
+#endif
+
+#include <iostream>
+
+using namespace std;
+
+int func() {
+	return 1;
+}
+
+int cilk_main( int argc, char* argv[] ) {
+	
+	int y = 0;
+	
+	// Count to 100000!
+	cilk_for ( int i = 0; i < 100000; i++ ) {
+		y += func();
+	}
+		
+	cout << endl << "Ilustration of a data race:" << endl << "Y should equal 100000 right? Y = " \
+		<< y << endl << endl;
+
+	return 0;
+}
