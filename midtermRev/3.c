@@ -5,7 +5,7 @@
 #include "mpi.h"
 
 
-//.//.//
+// Function for printing out small vectors
 void printVec(double* vec, int size, int my_rank) {
 	int i;
 	printf("\nMYRANK %d: ", my_rank);
